@@ -3,26 +3,36 @@ import javax.swing.*;
 import javax.swing.text.*;
 
 public class Interface {
-	// TODO: organize these declarations logically
-	static Button exit = new Button("Exit");
+	// The main window and container (default BorderLayout)
 	static JFrame frame = new JFrame("Farm Game");
-	static JPanel fieldPanel = new JPanel();
-	static JPanel inventoryPanel = new JPanel();
-	static JPanel optionsPanel = new JPanel();
-	static JTextArea messageBox = new JTextArea();
-	static DefaultCaret caret = (DefaultCaret) messageBox.getCaret();
-	static JScrollPane messageScroll = new JScrollPane(messageBox);
-	static JScrollPane fieldScroll = new JScrollPane(fieldPanel);
 	static Container mainPane = frame.getContentPane();
-	static JTabbedPane tabs = new JTabbedPane();
+
+	// Text field and String for bank (NORTH)
 	static JTextField bankField = new JTextField();
 	static String formattedVal = "";
 
+	// Text area for message box on a scroll pane, with caret for auto-scrolling
+	// (EAST)
+	static JTextArea messageBox = new JTextArea();
+	static JScrollPane messageScroll = new JScrollPane(messageBox);
+	static DefaultCaret caret = (DefaultCaret) messageBox.getCaret();
+
+	//Tabbed Pane with panel for each tab, scroll pane for fields
+	static JTabbedPane tabs = new JTabbedPane();
+	static JPanel fieldPanel = new JPanel();
+	static JPanel inventoryPanel = new JPanel();
+	static JPanel optionsPanel = new JPanel();
+	static JScrollPane fieldScroll = new JScrollPane(fieldPanel);
+
+	//Buttons for crops
 	static JButton wheatButton = new JButton("Wheat Field");
 	static JButton cornButton = new JButton("Corn Field");
+	
+	//Option buttons
 	static JButton saveButton = new JButton("Save");
 	static JButton loadButton = new JButton("Load");
 
+	//Actions for buttons
 	static Action wheatAction = new WheatAction();
 	static Action cornAction = new CornAction();
 	static Action saveAction = new SaveAction();
@@ -108,21 +118,20 @@ public class Interface {
 	}
 
 	public void GUIupdate() {
-		//Update text for bank value
+		// Update text for bank value
 		formattedVal = String.format("$ %.2f", Framework.bank);
 		bankField.setText(formattedVal);
 		bankField.repaint();
 
-		//Update text for field buttons
+		// Update text for field buttons
 		wheatButton.setText(WheatField.text);
-		
+
 		if (Framework.maxBank >= 150)
 			cornButton.setText(CornField.text);
 		else
 			cornButton.setText("Corn Field");
-		
-		
-		//Enable/disable buttons based on bank
+
+		// Enable/disable buttons based on bank
 		if (Framework.bank >= WheatField.price)
 			wheatButton.setEnabled(true);
 		else
