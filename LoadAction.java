@@ -55,6 +55,7 @@ public class LoadAction implements Action {
 
 			Framework.print("Game Loaded");
 			Framework.loadedGame = true;
+			Interface.loadButton.setEnabled(false);
 			Framework.update();
 
 			reader.close();
