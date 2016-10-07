@@ -17,22 +17,22 @@ public class Interface {
 	static JScrollPane messageScroll = new JScrollPane(messageBox);
 	static DefaultCaret caret = (DefaultCaret) messageBox.getCaret();
 
-	//Tabbed Pane with panel for each tab, scroll pane for fields
+	// Tabbed Pane with panel for each tab, scroll pane for fields
 	static JTabbedPane tabs = new JTabbedPane();
 	static JPanel fieldPanel = new JPanel();
 	static JPanel inventoryPanel = new JPanel();
 	static JPanel optionsPanel = new JPanel();
 	static JScrollPane fieldScroll = new JScrollPane(fieldPanel);
 
-	//Buttons for crops
+	// Buttons for crops
 	static JButton wheatButton = new JButton("Wheat Field");
 	static JButton cornButton = new JButton("Corn Field");
-	
-	//Option buttons
+
+	// Option buttons
 	static JButton saveButton = new JButton("Save");
 	static JButton loadButton = new JButton("Load");
 
-	//Actions for buttons
+	// Actions for buttons
 	static Action wheatAction = new WheatAction();
 	static Action cornAction = new CornAction();
 	static Action saveAction = new SaveAction();
@@ -102,8 +102,8 @@ public class Interface {
 		bankField.setText(formattedVal);
 		bankField.setFont(new Font("Arial", Font.PLAIN, 50));
 
-		// sets a 2 column layout with a tabbed pane on the left and a scrolling
-		// message box on the right
+		// border layout with tabbed pane in center, bank on top, and message
+		// box on the right
 		mainPane.add(tabs, BorderLayout.CENTER);
 		tabs.setFont(new Font("Arial", Font.PLAIN, 30));
 		fieldPanel.setBackground(new Color(0, 217, 0));
