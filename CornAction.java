@@ -10,17 +10,23 @@ public class CornAction implements Action {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		// increments fields owned and deducts price from bank
 		CornField.purchased();
 
+		// Calculates the grow time based on the modifier
 		int growTime = (int) (GrowTime.CORN * GrowTime.modifier);
 
-		if (CornField.owned == 1)
+		if (CornField.owned == 1) {
+			Framework.print("Corn grows every 7 seconds and sells for $7.00");
+			// schedule the task according to the grow time
 			timer.scheduleAtFixedRate(new TimerTask() {
 				@Override
 				public void run() {
 					CornField.grow();
 				}
+
 			}, growTime, growTime);
+		}
 	}
 
 	@Override

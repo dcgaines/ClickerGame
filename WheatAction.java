@@ -7,18 +7,24 @@ import javax.swing.Action;
 public class WheatAction implements Action {
 
 	static Timer timer = new Timer();
+	
+	//Calculates initial grow time, including modifier
+	int growTime = (int) (GrowTime.WHEAT * GrowTime.modifier);
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		//increments field count, deducts cost from bank
 		WheatField.purchased();
 		
-		int growTime = (int) (GrowTime.WHEAT * GrowTime.modifier);
-
+		//only executes the first time a field is purchased
 		if (WheatField.owned == 1) {
 			Framework.print("Wheat is produced at 1 per second\nand is sold for $1.00");
+			
+			//Grows wheat every second
 			timer.scheduleAtFixedRate(new TimerTask() {
 				@Override
 				public void run() {
+					//Adds to inventory every time it executes
 					WheatField.grow();
 				}
 			}, growTime, growTime);

@@ -1,6 +1,8 @@
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.Action;
+import javax.swing.JOptionPane;
+
 import java.io.*;
 
 public class SaveAction implements Action {
@@ -10,35 +12,48 @@ public class SaveAction implements Action {
 		// TODO Write to a file pertinent information, encrypt it later
 		File save = new File("saveGame.txt");
 		try {
-			if(Framework.savedGame || Framework.loadedGame){
-				save.delete();
-			}
-			
-			PrintWriter writer = new PrintWriter(save);
-			// Game variables will always have value
-			writer.println(Framework.bank);
-			writer.println(Framework.maxBank);
-			writer.println(Framework.autoSell);
-			writer.println(MarketPrice.modifier);
-			writer.println(GrowTime.modifier);
+			// If save file already exists, deletes it so it can be overridden
+			// This is necessary to make the file read-only for
+			// tamper-resistance
+			if (save.exists()) {
+				//Confirm if overwrite save
+				if (JOptionPane.showConfirmDialog(null, "This will overwrite your save file.  Continue?", "Confirm",
+						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == 0) {
+					save.delete();
 
-			// Crop variables may not have value
-			if (WheatField.owned != 0) {
-				writer.println(WheatField.owned);
-				writer.println(Framework.wheat);
+					// Creates a new PrintWriter for the save file
+					PrintWriter writer = new PrintWriter(save);
+
+					// Game variables will always have value
+					writer.println(Framework.bank);
+					writer.println(Framework.maxBank);
+					writer.println(Framework.autoSell);
+					writer.println(MarketPrice.modifier);
+					writer.println(GrowTime.modifier);
+
+					// Crop variables may not have value
+					if (WheatField.owned != 0) {
+						writer.println(WheatField.owned);
+						writer.println(Framework.wheat);
+					}
+
+					if (CornField.owned != 0) {
+						writer.println(CornField.owned);
+						writer.println(Framework.corn);
+					}
+
+					writer.close();
+					save.setReadOnly();
+
+					Framework.print("Game saved");
+					Framework.savedGame = true;
+
+				} else {
+					//If save is canceled
+					Framework.print("Save Canceled");
+				}
 			}
 
-			if (CornField.owned != 0) {
-				writer.println(CornField.owned);
-				writer.println(Framework.corn);
-			}
-
-			writer.close();
-			save.setReadOnly();
-			
-			Framework.print("Game saved");
-			Framework.savedGame = true;
-			
 		} catch (FileNotFoundException e) {
 			Framework.print("Error saving");
 		}

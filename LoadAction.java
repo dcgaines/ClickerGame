@@ -22,13 +22,19 @@ public class LoadAction implements Action {
 
 			// Crop variables may not have value
 			if (reader.hasNextLine()) {
+				//reads in all wheat variables
 				WheatField.owned = Integer.parseInt(reader.nextLine());
 				Framework.wheat = Integer.parseInt(reader.nextLine());
 				WheatField.price = WheatField.updatePrice();
 				WheatField.text = WheatField.updateText();
 
+				//Cancels previously scheduled grows
+				WheatAction.timer.cancel();
+				
+				//Determines grow time
 				int growTime = (int) (GrowTime.WHEAT * GrowTime.modifier);
 				
+				//Reschedules grows according to the loaded file
 				timer.scheduleAtFixedRate(new TimerTask() {
 					@Override
 					public void run() {
@@ -38,13 +44,19 @@ public class LoadAction implements Action {
 			}
 
 			if (reader.hasNextLine()) {
+				//reads in all corn variables
 				CornField.owned = Integer.parseInt(reader.nextLine());
 				Framework.corn = Integer.parseInt(reader.nextLine());
 				CornField.price = CornField.updatePrice();
 				CornField.text = CornField.updateText();
 				
+				//Cancels previously scheduled grows
+				CornAction.timer.cancel();
+				
+				//Determines grow time
 				int growTime = (int) (GrowTime.CORN * GrowTime.modifier);
 				
+				//Reschedules according to the loaded file
 				timer.scheduleAtFixedRate(new TimerTask() {
 					@Override
 					public void run() {
@@ -53,13 +65,16 @@ public class LoadAction implements Action {
 				}, growTime, growTime);
 			}
 
+			//Prints loaded, disables the load button, and updates the GUI
 			Framework.print("Game Loaded");
 			Framework.loadedGame = true;
 			Interface.loadButton.setEnabled(false);
 			Framework.update();
 
+			//closes reader
 			reader.close();
 		} catch (FileNotFoundException f) {
+			//If there is no save file
 			Framework.print("No save data found.");
 		}
 
