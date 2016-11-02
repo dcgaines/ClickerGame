@@ -1,13 +1,13 @@
 
 public class Main {
 
-	static Interface window = new Interface();
+	static Interface window = new Interface( );
 
-	public static void main(String[] args) {
+	public static void main( String[] args ) {
 		// Creates the initial window and applies settings to various components
-		window.GUIinit();
+		window.GUIinit( );
 
 		// Prints welcome message and initial instructions to the message box
-		Framework.print("Hello! Welcome to the Farm Game!      \nBuy a wheat field to get started.");
+		Framework.print( "Hello! Welcome to the Farm Game!      \nBuy a wheat field to get started." );
 	}
 }

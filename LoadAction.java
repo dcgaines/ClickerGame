@@ -66,7 +66,7 @@ public class LoadAction implements Action {
 			}
 
 			//Prints loaded, disables the load button, and updates the GUI
-			Framework.print("Game Loaded");
+			Framework.print("Game loaded");
 			Framework.loadedGame = true;
 			Interface.loadButton.setEnabled(false);
 			Framework.update();
