@@ -7,8 +7,19 @@ public class SellAction implements Action {
 
 	@Override
 	public void actionPerformed( ActionEvent arg0 ) {
+		Framework.bank += Framework.wheat * MarketPrice.WHEAT * MarketPrice.modifier;
+		Framework.wheat = 0;
 		
-
+		Framework.bank += Framework.corn * MarketPrice.CORN * MarketPrice.modifier;
+		Framework.corn = 0;
+		
+		Framework.bank += Framework.flour * MarketPrice.FLOUR * MarketPrice.modifier;
+		Framework.flour = 0;
+		
+		Framework.bank += Framework.cornMeal * MarketPrice.CORN_MEAL * MarketPrice.modifier;
+		Framework.cornMeal = 0;
+		
+		Framework.update( );
 	}
 
 	@Override
