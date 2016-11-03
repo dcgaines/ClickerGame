@@ -1,7 +1,6 @@
 
 public class Framework {
 	// boolean variables used to determine the state of the game
-	public static boolean autoSell = true;
 	public static boolean mill = false;
 	public static boolean loadedGame = false;
 	public static boolean savedGame = false;
@@ -22,18 +21,6 @@ public class Framework {
 
 	// Function that updates the GUI whenever anything occurs
 	public static void update( ) {
-		// Automatically sells all grown crops
-		if ( autoSell ) {
-			if ( mill ) {
-				mill = false;
-				MillAction.millOff( );
-			}
-			sellAll( );
-		} else if ( !mill ) {
-			MillAction.millOn( );
-			mill = true;
-		}
-
 		// updates max bank
 		if ( bank > maxBank )
 			maxBank = bank;

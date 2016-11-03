@@ -14,7 +14,6 @@ public class MillAction implements Action {
 		Mill.upgraded( );
 		if ( Mill.level == 0 ) {
 			millOn( );
-			Framework.autoSell = false;
 		}
 	}
 
