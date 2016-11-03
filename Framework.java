@@ -1,7 +1,8 @@
 
 public class Framework {
 	// boolean variables used to determine the state of the game
-	public static boolean mill = false;
+	public static boolean millF = false;
+	public static boolean millC = false;
 	public static boolean loadedGame = false;
 	public static boolean savedGame = false;
 
@@ -24,6 +25,15 @@ public class Framework {
 		// updates max bank
 		if ( bank > maxBank )
 			maxBank = bank;
+		
+		if ( wheat >= 2 ) {
+			MillAction.millOnF( );
+			Framework.millF = true;
+		}
+		if ( corn >= 1 ) {
+			MillAction.millOnC( );
+			Framework.millC = true;
+		}
 
 		// updates all GUI components and repaints if necessary
 		window.GUIupdate( );

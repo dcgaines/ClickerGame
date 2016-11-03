@@ -46,9 +46,9 @@ public class Interface {
 
 	static JTextField wheatText = new JTextField( "Wheat: 0" );
 	static JTextField cornText = new JTextField( "Corn: 0" );
-	
-	static JTextField flourText = new JTextField( "Flour: 0");
-	static JTextField cornMealText = new JTextField("Corn Meal: 0");
+
+	static JTextField flourText = new JTextField( "Flour: 0" );
+	static JTextField cornMealText = new JTextField( "Corn Meal: 0" );
 
 	// Sell button for inventory
 	static JButton sellButton = new JButton( "Sell all" );
@@ -151,7 +151,7 @@ public class Interface {
 			field.setHorizontalAlignment( 0 );
 			field.setEditable( false );
 		}
-		
+
 		productArray.add( flourText );
 		productArray.add( cornMealText );
 
@@ -161,7 +161,7 @@ public class Interface {
 		sellButton.setEnabled( true );
 		sellButton.setFont( inventoryFont );
 		sellButton.setText( "Sell All" );
-		
+
 		for ( int index = 0; index < productArray.size( ); index++ ) {
 			JTextField field = productArray.get( index );
 			rightPanel.add( field );
@@ -275,7 +275,7 @@ public class Interface {
 	public static void invenUpdate( ) {
 		wheatText.setText( "Wheat: " + Framework.wheat );
 		cornText.setText( "Corn: " + Framework.corn );
-		
+
 		flourText.setText( "Flour: " + Framework.flour );
 		cornMealText.setText( "Corn Meal: " + Framework.cornMeal );
 	}

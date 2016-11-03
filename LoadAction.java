@@ -23,6 +23,7 @@ public class LoadAction implements Action {
 			if ( reader.hasNextLine( ) ) {
 				if ( reader.findWithinHorizon( "wheat", 99999 ) != null ) {
 					// reads in all wheat variables
+					reader.nextLine( );
 					WheatField.owned = Integer.parseInt( reader.nextLine( ) );
 					Framework.wheat = Integer.parseInt( reader.nextLine( ) );
 					WheatField.price = WheatField.updatePrice( );
@@ -47,10 +48,11 @@ public class LoadAction implements Action {
 			if ( reader.hasNextLine( ) ) {
 				if ( reader.findWithinHorizon( "corn", 99999 ) != null ) {
 					// reads in all corn variables
+					reader.nextLine( );
 					CornField.owned = Integer.parseInt( reader.nextLine( ) );
 					Framework.corn = Integer.parseInt( reader.nextLine( ) );
-					CornField.price = CornField.updatePrice( );
-					CornField.text = CornField.updateText( );
+					CornField.updatePrice( );
+					CornField.updateText( );
 
 					// Cancels previously scheduled grows
 					CornAction.timer.cancel( );
