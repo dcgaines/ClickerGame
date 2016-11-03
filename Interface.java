@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.text.*;
 
@@ -39,6 +41,8 @@ public class Interface {
 
 	// Text Boxes for inventory
 	static Font inventoryFont = new Font( "Arial", Font.PLAIN, 42 );
+	static ArrayList<JTextField> cropArray = new ArrayList<JTextField>( );
+
 	static JTextField wheatText = new JTextField( "Wheat: 0" );
 	static JTextField cornText = new JTextField( "Corn: 0" );
 
@@ -55,6 +59,8 @@ public class Interface {
 	// Actions for buttons
 	static Action wheatAction = new WheatAction( );
 	static Action cornAction = new CornAction( );
+
+	static Action sellAction = new SellAction( );
 
 	static Action millAction = new MillAction( );
 
@@ -130,20 +136,17 @@ public class Interface {
 		rightPanel.setBackground( new Color( 252, 213, 141 ) );
 		rightPanel.setLayout( new GridLayout( 10, 0 ) );
 
-		leftPanel.add( wheatText );
-		leftPanel.add( cornText );
+		cropArray.add( wheatText );
+		cropArray.add( cornText );
 
-		wheatText.setFont( inventoryFont );
-		cornText.setFont( inventoryFont );
-
-		wheatText.setOpaque( false );
-		cornText.setOpaque( false );
-
-		wheatText.setHorizontalAlignment( 0 );
-		cornText.setHorizontalAlignment( 0 );
-
-		wheatText.setEditable( false );
-		cornText.setEditable( false );
+		for ( int index = 0; index < cropArray.size( ); index++ ) {
+			JTextField field = cropArray.get( index );
+			leftPanel.add( field );
+			field.setFont( inventoryFont );
+			field.setOpaque( false );
+			field.setHorizontalAlignment( 0 );
+			field.setEditable( false );
+		}
 
 		rightPanel.add( sellButton );
 
@@ -253,7 +256,7 @@ public class Interface {
 	}
 
 	public static void invenUpdate( ) {
-		wheatText.setText( "Wheat: " + Framework.wheat);
+		wheatText.setText( "Wheat: " + Framework.wheat );
 		cornText.setText( "Corn: " + Framework.corn );
 	}
 
