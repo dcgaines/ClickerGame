@@ -7,32 +7,27 @@ public class WheatField implements Field {
 	public static String text = "Wheat Field";
 
 	// Method to execute when wheat grows
-	public static void grow() {
+	public static void grow( ) {
 		Framework.wheat += owned;
-		Framework.update();
+		Framework.update( );
 	}
 
 	// Method to execute when a wheat field is purchased
-	public static void purchased() {
+	public static void purchased( ) {
 		owned++;
 		Framework.bank -= price;
-		price = updatePrice();
-		text = updateText();
-		Framework.update();
+		updatePrice( );
+		updateText( );
+		Framework.update( );
 	}
 
 	// Algorithm to calculate the price of the next field based on fields owned
-	public static double updatePrice() {
-		// TODO: write an actual price algorithm
-		double newPrice = 5;
-		newPrice *= owned;
-
-		return newPrice;
-
+	public static void updatePrice( ) {
+		price *= 1.2;
 	}
 
 	// Method to update the text on the button
-	public static String updateText() {
-		return "Wheat Field   |   " + owned + " Owned   |   " + String.format("$%.2f", price);
+	public static void updateText( ) {
+		text = "Wheat Field   |   " + owned + " Owned   |   " + String.format( "$%.2f", price );
 	}
 }

@@ -10,11 +10,11 @@ public interface Field {
 
 	}
 
-	public static double updatePrice( ) {
-		return 0;
+	public static void updatePrice( ) {
+
 	}
 
-	public static String updateText( ) {
-		return null;
+	public static void updateText( ) {
+
 	}
 }

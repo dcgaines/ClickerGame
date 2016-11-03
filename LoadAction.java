@@ -25,9 +25,9 @@ public class LoadAction implements Action {
 					// reads in all wheat variables
 					reader.nextLine( );
 					WheatField.owned = Integer.parseInt( reader.nextLine( ) );
+					WheatField.price = Integer.parseInt( reader.nextLine( ) );
 					Framework.wheat = Integer.parseInt( reader.nextLine( ) );
-					WheatField.price = WheatField.updatePrice( );
-					WheatField.text = WheatField.updateText( );
+					WheatField.updateText( );
 
 					// Cancels previously scheduled grows
 					WheatAction.timer.cancel( );
@@ -50,8 +50,8 @@ public class LoadAction implements Action {
 					// reads in all corn variables
 					reader.nextLine( );
 					CornField.owned = Integer.parseInt( reader.nextLine( ) );
+					CornField.price = Integer.parseInt( reader.nextLine( ) );
 					Framework.corn = Integer.parseInt( reader.nextLine( ) );
-					CornField.updatePrice( );
 					CornField.updateText( );
 
 					// Cancels previously scheduled grows
@@ -67,6 +67,16 @@ public class LoadAction implements Action {
 							CornField.grow( );
 						}
 					}, growTime, growTime );
+				}
+			}
+			
+			if (reader.hasNextLine( )) {
+				if ( reader.findWithinHorizon( "mill", 99999 ) != null) {
+					reader.nextLine( );
+					Mill.level = Integer.parseInt( reader.nextLine( ) );
+					Mill.price = Integer.parseInt( reader.nextLine( ) );
+					Framework.flour = Integer.parseInt( reader.nextLine( ) );
+					Framework.cornMeal = Integer.parseInt( reader.nextLine( ) );
 				}
 			}
 

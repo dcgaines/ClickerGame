@@ -34,12 +34,14 @@ public class SaveAction implements Action {
 					if ( WheatField.owned != 0 ) {
 						writer.println( "wheat" );
 						writer.println( WheatField.owned );
+						writer.println( WheatField.price );
 						writer.println( Framework.wheat );
 					}
 
 					if ( CornField.owned != 0 ) {
 						writer.println( "corn" );
 						writer.println( CornField.owned );
+						writer.println( CornField.price );
 						writer.println( Framework.corn );
 					}
 
@@ -47,6 +49,7 @@ public class SaveAction implements Action {
 					if ( Mill.level != 0 ) {
 						writer.println( "mill" );
 						writer.println( Mill.level );
+						writer.println( Mill.price );
 						writer.println( Framework.flour );
 						writer.println( Framework.cornMeal );
 					}
