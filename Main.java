@@ -8,6 +8,6 @@ public class Main {
 		window.GUIinit( );
 
 		// Prints welcome message and initial instructions to the message box
-		Framework.print( "Hello! Welcome to the Farm Game!      \nBuy a wheat field to get started." );
+		Framework.print( "Hello! Welcome to the Farm Game!      \nBuy a wheat field to get started." );		
 	}
 }

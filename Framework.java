@@ -26,12 +26,14 @@ public class Framework {
 		if ( bank > maxBank )
 			maxBank = bank;
 		
-		if ( wheat >= 2 ) {
+		if ( wheat >= 2 && !millF && Mill.level >= 1) {
 			MillAction.millOnF( );
+			Framework.print( "Flour mill started." );
 			Framework.millF = true;
 		}
-		if ( corn >= 1 ) {
+		if ( corn >= 1 && !millC && Mill.level >= 1) {
 			MillAction.millOnC( );
+			Framework.print( "Corn meal mill started." );
 			Framework.millC = true;
 		}
 

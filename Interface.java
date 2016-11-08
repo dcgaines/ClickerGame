@@ -111,7 +111,7 @@ public class Interface {
 
 		// Text for field buttons
 		wheatButton.setText( WheatField.text );
-		if ( Framework.maxBank >= 150 )
+		if ( Framework.maxBank >= 75 )
 			cornButton.setText( CornField.text );
 		else
 			cornButton.setText( "Corn Field" );

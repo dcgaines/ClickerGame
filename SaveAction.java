@@ -7,65 +7,72 @@ import java.io.*;
 
 public class SaveAction implements Action {
 
+	File save = new File( "saveGame.txt" );
+
 	@Override
 	public void actionPerformed( ActionEvent arg0 ) {
-		// TODO Write to a file pertinent information, encrypt it later
-		File save = new File( "saveGame.txt" );
+		// Write to a file pertinent information
+		// If save file already exists, deletes it so it can be overridden
+		// This is necessary to make the file read-only for
+		// tamper-resistance
+		if ( save.exists( ) ) {
+			// Confirm if overwrite save
+			if ( JOptionPane.showConfirmDialog( null, "This will overwrite your save file.  Continue?", "Confirm",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE ) == 0 ) {
+				save.delete( );
+				save( );
+
+			} else {
+				// If save is canceled
+				Framework.print( "Save Canceled" );
+			}
+		} else {
+			save( );
+		}
+
+	}
+
+	public void save( ) {
+
 		try {
-			// If save file already exists, deletes it so it can be overridden
-			// This is necessary to make the file read-only for
-			// tamper-resistance
-			if ( save.exists( ) ) {
-				// Confirm if overwrite save
-				if ( JOptionPane.showConfirmDialog( null, "This will overwrite your save file.  Continue?", "Confirm",
-						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE ) == 0 ) {
-					save.delete( );
+			// Creates a new PrintWriter for the save file
+			PrintWriter writer = new PrintWriter( save );
 
-					// Creates a new PrintWriter for the save file
-					PrintWriter writer = new PrintWriter( save );
+			// Game variables will always have value
+			writer.println( Framework.bank );
+			writer.println( Framework.maxBank );
+			writer.println( MarketPrice.modifier );
+			writer.println( GrowTime.modifier );
 
-					// Game variables will always have value
-					writer.println( Framework.bank );
-					writer.println( Framework.maxBank );
-					writer.println( MarketPrice.modifier );
-					writer.println( GrowTime.modifier );
-
-					// Crop variables may not have value
-					if ( WheatField.owned != 0 ) {
-						writer.println( "wheat" );
-						writer.println( WheatField.owned );
-						writer.println( WheatField.price );
-						writer.println( Framework.wheat );
-					}
-
-					if ( CornField.owned != 0 ) {
-						writer.println( "corn" );
-						writer.println( CornField.owned );
-						writer.println( CornField.price );
-						writer.println( Framework.corn );
-					}
-
-					// Building variables may not have value
-					if ( Mill.level != 0 ) {
-						writer.println( "mill" );
-						writer.println( Mill.level );
-						writer.println( Mill.price );
-						writer.println( Framework.flour );
-						writer.println( Framework.cornMeal );
-					}
-
-					writer.close( );
-					save.setReadOnly( );
-
-					Framework.print( "Game saved" );
-					Framework.savedGame = true;
-
-				} else {
-					// If save is canceled
-					Framework.print( "Save Canceled" );
-				}
+			// Crop variables may not have value
+			if ( WheatField.owned != 0 ) {
+				writer.println( "wheat" );
+				writer.println( WheatField.owned );
+				writer.println( WheatField.price );
+				writer.println( Framework.wheat );
 			}
 
+			if ( CornField.owned != 0 ) {
+				writer.println( "corn" );
+				writer.println( CornField.owned );
+				writer.println( CornField.price );
+				writer.println( Framework.corn );
+			}
+
+			// Building variables may not have value
+			if ( Mill.level != 0 ) {
+				writer.println( "mill" );
+				writer.println( Mill.level );
+				writer.println( Mill.price );
+				writer.println( Framework.flour );
+				writer.println( Framework.cornMeal );
+			}
+
+			writer.close( );
+			save.setReadOnly( );
+
+			Framework.print( "Game saved" );
+			Framework.savedGame = true;
 		} catch ( FileNotFoundException e ) {
 			Framework.print( "Error saving" );
 		}
