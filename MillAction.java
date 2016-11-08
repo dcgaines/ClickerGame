@@ -13,8 +13,8 @@ public class MillAction implements Action {
 
 		Mill.upgraded( );
 		if ( Mill.level == 0 ) {
-			Framework.print( "The mill converts 2 wheat to 1 flour every 10 seconds, "
-					+ "and 1 corn to 1 corn meal every 20 seconds." );
+			Framework.print( "The mill converts 2 wheat to 1 flour every 4 seconds, "
+					+ "and 1 corn to 1 corn meal every 7 seconds." );
 			Framework.print( "Flour sells for $5.00 and corn meal sells for $41.00" );
 			Framework.print( "Note that the mill will not run if there are insufficient crops!" );
 		}
